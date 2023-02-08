@@ -1,0 +1,4 @@
+qt/qt_libbitcoinqt_a-qrc_qodex.o: qt/qrc_qodex.cpp \
+ /usr/include/stdc-predef.h
+
+/usr/include/stdc-predef.h:

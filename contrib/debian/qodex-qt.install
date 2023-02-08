@@ -1,0 +1,6 @@
+usr/local/bin/qodex-qt usr/bin
+share/pixmaps/qodex32.xpm usr/share/pixmaps
+share/pixmaps/qodex16.xpm usr/share/pixmaps
+share/pixmaps/qodex128.png usr/share/pixmaps
+debian/qodex-qt.desktop usr/share/applications
+debian/qodex-qt.protocol usr/share/kde4/services/

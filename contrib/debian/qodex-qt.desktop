@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Qodex Core
+Comment=Qodex P2P Cryptocurrency
+Exec=qodex-qt %u
+Terminal=false
+Type=Application
+Icon=qodex128
+MimeType=x-scheme-handler/qodex;
+Categories=Office;Finance;
+StartupWMClass=Qodex-qt
+Name[en_US]=qodex-qt.desktop

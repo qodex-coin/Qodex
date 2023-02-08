@@ -1,0 +1,37 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/qodex_bg.qm</file>
+        <file alias="ca">locale/qodex_ca.qm</file>
+        <file alias="cs">locale/qodex_cs.qm</file>
+        <file alias="da">locale/qodex_da.qm</file>
+        <file alias="de">locale/qodex_de.qm</file>
+        <file alias="en">locale/qodex_en.qm</file>
+        <file alias="en_GB">locale/qodex_en_GB.qm</file>
+        <file alias="en_US">locale/qodex_en_US.qm</file>
+        <file alias="eo">locale/qodex_eo.qm</file>
+        <file alias="es">locale/qodex_es.qm</file>
+        <file alias="es_ES">locale/qodex_es_ES.qm</file>
+        <file alias="fi">locale/qodex_fi.qm</file>
+        <file alias="fr_FR">locale/qodex_fr_FR.qm</file>
+        <file alias="hi_IN">locale/qodex_hi_IN.qm</file>
+        <file alias="hr">locale/qodex_hr.qm</file>
+        <file alias="hr_HR">locale/qodex_hr_HR.qm</file>
+        <file alias="it">locale/qodex_it.qm</file>
+        <file alias="ja">locale/qodex_ja.qm</file>
+        <file alias="ko_KR">locale/qodex_ko_KR.qm</file>
+        <file alias="lt_LT">locale/qodex_lt_LT.qm</file>
+        <file alias="nl">locale/qodex_nl.qm</file>
+        <file alias="pl">locale/qodex_pl.qm</file>
+        <file alias="pt">locale/qodex_pt.qm</file>
+        <file alias="pt_BR">locale/qodex_pt_BR.qm</file>
+        <file alias="ro_RO">locale/qodex_ro_RO.qm</file>
+        <file alias="ru">locale/qodex_ru.qm</file>
+        <file alias="sk">locale/qodex_sk.qm</file>
+        <file alias="sv">locale/qodex_sv.qm</file>
+        <file alias="tr">locale/qodex_tr.qm</file>
+        <file alias="uk">locale/qodex_uk.qm</file>
+        <file alias="vi">locale/qodex_vi.qm</file>
+        <file alias="zh_CN">locale/qodex_zh_CN.qm</file>
+        <file alias="zh_TW">locale/qodex_zh_TW.qm</file>
+    </qresource>
+</RCC>

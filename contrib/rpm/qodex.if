@@ -1,0 +1,157 @@
+
+## <summary>policy for qodex</summary>
+
+
+########################################
+## <summary>
+##	Transition to qodex.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`qodex_domtrans',`
+	gen_require(`
+		type qodex_t, qodex_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, qodex_exec_t, qodex_t)
+')
+
+
+########################################
+## <summary>
+##	Execute qodex server in the qodex domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`qodex_initrc_domtrans',`
+	gen_require(`
+		type qodex_initrc_exec_t;
+	')
+
+	init_labeled_script_domtrans($1, qodex_initrc_exec_t)
+')
+
+
+########################################
+## <summary>
+##	Search qodex lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`qodex_search_lib',`
+	gen_require(`
+		type qodex_var_lib_t;
+	')
+
+	allow $1 qodex_var_lib_t:dir search_dir_perms;
+	files_search_var_lib($1)
+')
+
+########################################
+## <summary>
+##	Read qodex lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`qodex_read_lib_files',`
+	gen_require(`
+		type qodex_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	read_files_pattern($1, qodex_var_lib_t, qodex_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage qodex lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`qodex_manage_lib_files',`
+	gen_require(`
+		type qodex_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_files_pattern($1, qodex_var_lib_t, qodex_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage qodex lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`qodex_manage_lib_dirs',`
+	gen_require(`
+		type qodex_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_dirs_pattern($1, qodex_var_lib_t, qodex_var_lib_t)
+')
+
+
+########################################
+## <summary>
+##	All of the rules required to administrate
+##	a qodex environment
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+## <param name="role">
+##	<summary>
+##	Role allowed access.
+##	</summary>
+## </param>
+## <rolecap/>
+#
+interface(`qodex_admin',`
+	gen_require(`
+		type qodex_t;
+		type qodex_initrc_exec_t;
+		type qodex_var_lib_t;
+	')
+
+	allow $1 qodex_t:process { ptrace signal_perms };
+	ps_process_pattern($1, qodex_t)
+
+	qodex_initrc_domtrans($1)
+	domain_system_change_exemption($1)
+	role_transition $2 qodex_initrc_exec_t system_r;
+	allow $2 system_r;
+
+	files_search_var_lib($1)
+	admin_pattern($1, qodex_var_lib_t)
+
+')
+

@@ -1,0 +1,81 @@
+policy_module(qodex, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type qodex_t;
+type qodex_exec_t;
+init_daemon_domain(qodex_t, qodex_exec_t)
+
+permissive qodex_t;
+
+type qodex_initrc_exec_t;
+init_script_file(qodex_initrc_exec_t)
+
+type qodex_conf_t;
+files_type(qodex_conf_t)
+
+type qodex_var_lib_t;
+files_type(qodex_var_lib_t)
+
+type qodex_var_run_t;
+files_type(qodex_var_run_t)
+
+type qodex_port_t;
+corenet_port(qodex_port_t)
+
+########################################
+#
+# qodex local policy
+#
+allow qodex_t self:process { fork };
+
+allow qodex_t self:fifo_file rw_fifo_file_perms;
+allow qodex_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(qodex_t, qodex_conf_t, qodex_conf_t)
+manage_files_pattern(qodex_t, qodex_conf_t, qodex_conf_t)
+
+manage_dirs_pattern(qodex_t, qodex_var_lib_t, qodex_var_lib_t)
+manage_files_pattern(qodex_t, qodex_var_lib_t, qodex_var_lib_t)
+files_var_lib_filetrans(qodex_t, qodex_var_lib_t, { dir file })
+
+manage_dirs_pattern(qodex_t, qodex_var_run_t, qodex_var_run_t)
+manage_files_pattern(qodex_t, qodex_var_run_t, qodex_var_run_t)
+
+sysnet_dns_name_resolve(qodex_t)
+corenet_all_recvfrom_unlabeled(qodex_t)
+
+allow qodex_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(qodex_t)
+corenet_tcp_sendrecv_generic_node(qodex_t)
+corenet_tcp_sendrecv_all_ports(qodex_t)
+corenet_tcp_bind_generic_node(qodex_t)
+
+gen_require(`
+    type qodex_port_t;
+')
+allow qodex_t qodex_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type qodex_port_t;
+')
+allow qodex_t qodex_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(qodex_t)
+
+files_read_etc_files(qodex_t)
+
+miscfiles_read_localization(qodex_t)
+
+sysnet_dns_name_resolve(qodex_t)
+
+allow qodex_t qodex_exec_t:file execute_no_trans;
+allow qodex_t self:process setsched;
+corecmd_exec_ls(qodex_t)
+corenet_tcp_connect_http_port(qodex_t)
+dev_read_urand(qodex_t)
+fs_getattr_xattr_fs(qodex_t)
+kernel_read_system_state(qodex_t)
